@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halo Dunia</title>
+    <style>
+             form {
+      display: grid;
+      gap: 15px;
+      margin-top: 20px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    label {
+      font-weight: 600;
+      margin-bottom: 6px;
+      display: block;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+    button {
+      background: #1976d2;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #0d47a1;
+    }
+    #welcome {
+      margin-top: 15px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #0d47a1;
+      text-align: center;
+    }
+    footer {
+      text-align: center;
+      padding: 15px;
+      margin-top: 40px;
+      background: #0d47a1;
+      color: white;
+    }
+     </style>
+</head>
+<body style="background-color: rgb(206, 208, 222);">
+    <center><h1 style="background-color: azure;">'Halo Dunia'</h1></center><hr>
+    <center><p>Perkenalkan nama saya Dimas Prayoga, biasa dipanggil Dimas.<br></p>
+    <p>Alamat saya di Desa Tlogorejo, Kec.Kepohbaru, Kab.Bojonegoro.<br></p>
+    <p>Saya seorang Mahasiswa PENS PSDKU Lamongan.</p>
+    <img src="Foto pribadi.jpg" alt="foto dimas image" width="220" height="300">
+    <ul>
+    </center>
+        <center>
+         Hobi:
+        <li>Voli</li>
+        <li>Memancing</li>
+        <li>Berenang</li>
+        </center>
+    
+    </ul>
+    <center><table border="1" cellpadding="10" cellspacing="0" style="background-color: rgb(251, 252, 252);">
+        <tr>
+            <th>Waktu</th>
+            <th>Kegiatan</th>
+        </tr>
+        <tr>
+            <th>Pagi</th>
+            <th>Kuliah</th>
+        </tr>
+        <tr>
+            <th>Siang</th>
+            <th>Kuliah</th>
+        </tr>
+        <tr>
+            <th>Sore</th>
+            <th>Pulang</th>
+        </tr>
+        <tr>
+            <th>Malam</th>
+            <th>Tidur</th>
+        </tr>
+    </table><br></center>
+    <center>
+      <h2>From Pendaftaran</h2>
+      <form id="userForm">
+        <label for="fname">Input Nama lengkap:</label><br>
+        <input type="text" id="namaLengkap" name="fname"><br>
+        <label for="email">Input Email:</label><br>
+        <input type="email" id="email" name="email"><br><br>
+        <button type="submit">submit</button>
+    </form><br> 
+    <p id="welcomeMessage"></p>
+    <hr>
+    </center>
+
+    <iframe width="420" height="345"
+    src="https://www.youtube.com/embed/mSRooiEVI5M">
+    </iframe><br>
+    <audio controls autoplay muted>
+        <source src="audio.mp3" type="audio/ogg">
+        <source src="audio.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio><br>
+    <section>
+            <div class="geo-box">
+              <h2>Lokasi Anda</h2>
+              <p id="location">Menunggu izin lokasi...</p>
+          </div>
+          </section>
+      
+          <section>
+        <div class="<div style="position:relative; width:100%; padding-bottom:56.25%; height:0; overflow:hidden;">
+          <h2>Lokasi Rumah Saya</h2>
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1748.326494999411!2d112.08720583209299!3d-7.1505698173230385!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7789004ecc44bd%3A0x9b799618e9bf83fb!2sMusholla%20rt%2015!5e0!3m2!1sid!2sid!4v1756880157199!5m2!1sid!2sid"
+              style="width:100%; height:400px; border:0; border-radius:8px;" 
+        allowfullscreen
+        loading="lazy">
+            </iframe>
+        </div>
+          </section>
+        </main>
+<footer>
+&copy; 2025 Dimas Prayoga
+</footer>
+<script>
+
+        const form = document.getElementById("userForm");
+        const welcomeMessage = document.getElementById("welcomeMessage");
+
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            const nama = document.getElementById("namaLengkap").value;
+            localStorage.setItem("namaPengguna", nama);
+            welcomeMessage.textContent = "Selamat datang kembali, " + nama + "!";
+        });
+
+        window.onload = function () {
+            const savedNama = localStorage.getItem("namaPengguna");
+            if (savedNama) {
+                welcomeMessage.textContent = "Selamat datang kembali, " + savedNama + "!";
+            }
+        };
+        const lokasi = document.getElementById("location");
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (pos) => {
+                    lokasi.textContent =`Latitude: ${pos.coords.latitude}, Longitude: ${pos.coords.longitude}`;
+                },
+                (err) => {
+                    lokasi.textContent = "Gagal mendapatkan lokasi: " + err.message + " nyalakan izin lokasi di browser anda!";
+                }
+            );
+        } else {
+            lokasi.textContent = "Browser tidak mendukung Geolocation.";
+        }
+  </script>
+</body>
+</html>

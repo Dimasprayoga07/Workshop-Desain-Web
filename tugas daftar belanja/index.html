@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Daftar Belanja</title>
+  <style>
+    /* Style Dasar */
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      background: white;
+      width: 350px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      padding: 25px;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    /* Input dan Tombol Tambah */
+    .input-area {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    input {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 14px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #667eea;
+    }
+
+    button.add {
+      background: #667eea;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.2s;
+    }
+
+    button.add:hover {
+      background: #5a6fd6;
+      transform: scale(1.05);
+    }
+
+    /* LIST ITEM */
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      max-height: 250px;
+      overflow-y: auto;
+    }
+
+    li {
+      background: #f6f6f6;
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: 0.3s;
+    }
+
+    li:hover {
+      background: #f0f0f0;
+      transform: scale(1.02);
+    }
+
+    .hapus {
+      background: #ff5252;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 5px 10px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .hapus:hover {
+      background: #e84141;
+    }
+
+    /*  Tombol Hapus Semua */
+    .hapus-semua {
+      background: #e74c3c;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 15px;
+      margin-top: 15px;
+      cursor: pointer;
+      transition: 0.2s;
+      font-weight: bold;
+    }
+
+    .hapus-semua:hover {
+      background: #c0392b;
+      transform: scale(1.05);
+    }
+
+    /* 🌿 SCROLL */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #bbb;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1> Daftar Belanja</h1>
+    <div class="input-area">
+      <input type="text" id="inputItem" placeholder="Tambahkan item...">
+      <button class="add" onclick="tambahItem()">Tambah</button>
+    </div>
+
+    <ul id="daftar"></ul>
+
+    <button class="hapus-semua" onclick="hapusSemua()">Hapus Semua</button>
+  </div>
+
+  <script>
+    // Ambil data dari localStorage
+    let daftar = JSON.parse(localStorage.getItem('belanja')) || [];
+
+    // Fungsi menampilkan daftar
+    function render() {
+      const ul = document.getElementById('daftar');
+      ul.innerHTML = '';
+
+      if (daftar.length === 0) {
+        ul.innerHTML = "<p style='color:#777;'>Belum ada item </p>";
+        return;
+      }
+
+      daftar.forEach((item, i) => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+          <span>${item}</span>
+          <button class="hapus" onclick="hapusItem(${i})">Hapus</button>
+        `;
+        ul.appendChild(li);
+      });
+    }
+
+    // Tambah item baru
+    function tambahItem() {
+      const input = document.getElementById('inputItem');
+      const teks = input.value.trim();
+
+      if (teks === '') {
+        alert('Masukkan nama item terlebih dahulu!');
+        return;
+      }
+
+      daftar.push(teks);
+      input.value = '';
+      simpan();
+      render();
+    }
+
+    // Hapus item satu per satu
+    function hapusItem(i) {
+      daftar.splice(i, 1);
+      simpan();
+      render();
+    }
+
+    // Hapus semua item
+    function hapusSemua() {
+      if (confirm('Yakin ingin menghapus semua item?')) {
+        daftar = [];
+        simpan();
+        render();
+      }
+    }
+
+    // Simpan ke localStorage
+    function simpan() {
+      localStorage.setItem('belanja', JSON.stringify(daftar));
+    }
+
+    // Jalankan saat halaman dimuat
+    render();
+  </script>
+
+</body>
+</html>

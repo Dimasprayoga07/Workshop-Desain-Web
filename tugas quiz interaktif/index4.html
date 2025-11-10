@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz Interaktif</title>
+  <style>
+    /* Style Dasar */
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #4facfe, #00f2fe);
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .quiz-container {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      width: 400px;
+      max-width: 90%;
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    h1 {
+      font-size: 22px;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .question {
+      font-size: 18px;
+      margin-bottom: 20px;
+      color: #222;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .option {
+      background: #f4f4f4;
+      border: 2px solid transparent;
+      padding: 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: 0.2s;
+    }
+
+    .option:hover {
+      background: #eaf4ff;
+      border-color: #4facfe;
+    }
+
+    .option.selected {
+      background: #4facfe;
+      color: white;
+    }
+
+    button {
+      background: #4facfe;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      margin-top: 20px;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background: #009ffd;
+      transform: scale(1.05);
+    }
+
+    .score {
+      font-size: 20px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    /* Responsif */
+    @media (max-width: 480px) {
+      .quiz-container {
+        width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="quiz-container">
+    <h1> Kuis JavaScript</h1>
+    <div id="quiz">
+      <div id="question" class="question"></div>
+      <div id="options" class="options"></div>
+      <button id="nextBtn" onclick="nextQuestion()">Selanjutnya ➜</button>
+    </div>
+    <div id="result" class="hidden">
+      <h2> Kuis Selesai!</h2>
+      <p class="score">Skor Anda: <span id="score"></span> / 5</p>
+      <button onclick="restartQuiz()">Ulangi Kuis </button>
+    </div>
+  </div>
+
+  <script>
+    // Array berisi pertanyaan kuis
+    const questions = [
+      {
+        question: "Apa singkatan dari JS?",
+        options: ["JavaSimple", "JavaScript", "JustScript", "JumpScript"],
+        answer: "JavaScript"
+      },
+      {
+        question: "Siapa pencipta JavaScript?",
+        options: ["Mark Zuckerberg", "Brendan Eich", "Elon Musk", "Bill Gates"],
+        answer: "Brendan Eich"
+      },
+      {
+        question: "JavaScript berjalan di sisi mana?",
+        options: ["Server", "Database", "Client (Browser)", "Jaringan"],
+        answer: "Client (Browser)"
+      },
+      {
+        question: "Manakah tipe data yang benar di JavaScript?",
+        options: ["integer", "float", "number", "decimal"],
+        answer: "number"
+      },
+      {
+        question: "Bagaimana cara menampilkan alert di JS?",
+        options: ["msg()", "prompt()", "alert()", "show()"],
+        answer: "alert()"
+      }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+    let selectedAnswer = '';
+
+    // Menampilkan pertanyaan
+    function showQuestion() {
+      const q = questions[currentQuestion];
+      document.getElementById('question').textContent = `(${currentQuestion + 1}) ${q.question}`;
+      const optionsDiv = document.getElementById('options');
+      optionsDiv.innerHTML = '';
+
+      q.options.forEach(opt => {
+        const btn = document.createElement('div');
+        btn.textContent = opt;
+        btn.className = 'option';
+        btn.onclick = () => selectOption(btn, opt);
+        optionsDiv.appendChild(btn);
+      });
+    }
+
+    // Memilih jawaban
+    function selectOption(element, answer) {
+      document.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+      element.classList.add('selected');
+      selectedAnswer = answer;
+    }
+
+    // Tombol Selanjutnya
+    function nextQuestion() {
+      if (!selectedAnswer) {
+        alert('Pilih jawaban dulu ya!');
+        return;
+      }
+
+      if (selectedAnswer === questions[currentQuestion].answer) {
+        score++;
+      }
+
+      selectedAnswer = '';
+      currentQuestion++;
+
+      if (currentQuestion < questions.length) {
+        showQuestion();
+      } else {
+        showResult();
+      }
+    }
+
+    // Menampilkan hasil akhir
+    function showResult() {
+      document.getElementById('quiz').classList.add('hidden');
+      document.getElementById('result').classList.remove('hidden');
+      document.getElementById('score').textContent = score;
+    }
+
+    // Ulangi kuis
+    function restartQuiz() {
+      currentQuestion = 0;
+      score = 0;
+      document.getElementById('result').classList.add('hidden');
+      document.getElementById('quiz').classList.remove('hidden');
+      showQuestion();
+    }
+
+    // Mulai kuis pertama kali
+    showQuestion();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jam Digital & Kalender</title>
+  <style>
+    body {
+      background: linear-gradient(135deg, #1d2671, #c33764);
+      color: #fff;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .jam {
+      font-size: 70px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .tanggal {
+      font-size: 24px;
+      color: #ccc;
+    }
+
+    .kotak {
+      text-align: center;
+      padding: 30px 60px;
+      border-radius: 15px;
+      background: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+<body>
+  <div class="kotak">
+    <div id="jam" class="jam"></div>
+    <div id="tanggal" class="tanggal"></div>
+  </div>
+
+  <script>
+    function updateTime() {
+      const now = new Date();
+
+      // Format jam
+      const jam = String(now.getHours()).padStart(2, '0');
+      const menit = String(now.getMinutes()).padStart(2, '0');
+      const detik = String(now.getSeconds()).padStart(2, '0');
+      document.getElementById('jam').textContent = `${jam}:${menit}:${detik}`;
+
+      // Format tanggal
+      const hariList = ["Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"];
+      const bulanList = [
+        "Januari","Februari","Maret","April","Mei","Juni",
+        "Juli","Agustus","September","Oktober","November","Desember"
+      ];
+
+      const hari = hariList[now.getDay()];
+      const tanggal = now.getDate();
+      const bulan = bulanList[now.getMonth()];
+      const tahun = now.getFullYear();
+
+      const formatTanggal = `${hari}, ${tanggal} ${bulan} ${tahun}`;
+      document.getElementById('tanggal').textContent = formatTanggal;
+    }
+
+    setInterval(updateTime, 1000);
+    updateTime();
+  </script>
+</body>
+</html>

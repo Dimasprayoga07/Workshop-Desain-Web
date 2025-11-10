@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Kalkulator Sederhana</title>
+  <style>
+    /* Latar & Font */
+    body {
+      background: linear-gradient(135deg, #1d2671, #c33764);
+      font-family: 'Poppins', sans-serif;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+    }
+
+    /* Container utama kalkulator */
+    .kalkulator {
+      background: #222;
+      border-radius: 25px;
+      padding: 20px;
+      width: 320px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    }
+
+    /* Layar hasil */
+    .layar {
+      background: #000;
+      color: #00ff9d;
+      text-align: right;
+      padding: 20px;
+      border-radius: 15px;
+      font-size: 32px;
+      margin-bottom: 20px;
+      height: 60px;
+      overflow-x: auto;
+    }
+
+    /* Grid tombol */
+    .tombol-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    /* Tombol */
+    button {
+      background: #333;
+      border: none;
+      color: white;
+      font-size: 22px;
+      border-radius: 15px;
+      padding: 18px;
+      cursor: pointer;
+      transition: 0.15s;
+      box-shadow: 0 3px #111;
+    }
+
+    button:hover {
+      background: #444;
+    }
+
+    button:active {
+      transform: scale(0.95);
+      box-shadow: 0 1px #e7e5e5;
+    }
+
+    /* Warna tombol khusus */
+    .operator {
+      background: #ff9f43;
+      color: #111;
+      font-weight: bold;
+    }
+
+    .clear {
+      background: #e74c3c;
+      font-weight: bold;
+    }
+
+    .equal {
+      background: #2ecc71;
+      grid-column: span 2;
+      font-weight: bold;
+    }
+
+    .input {
+      grid-column: span 4;
+      background: #444;
+      color: #eee;
+    }
+
+    .input:hover {
+      background: #333;
+     }
+
+    /* Hp Responsif */
+    @media (max-width: 400px) {
+      .kalkulator {
+        width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="kalkulator">
+    <div id="layar" class="layar">0</div>
+
+    <div class="tombol-grid">
+      <button class="clear" onclick="hapus()">C</button>
+      <button onclick="hapusSatu()">⌫</button>
+      <button class="operator" onclick="masukkan('/')">÷</button>
+      <button class="operator" onclick="masukkan('*')">×</button>
+
+      <button onclick="masukkan('7')">7</button>
+      <button onclick="masukkan('8')">8</button>
+      <button onclick="masukkan('9')">9</button>
+      <button class="operator" onclick="masukkan('-')">−</button>
+
+      <button onclick="masukkan('4')">4</button>
+      <button onclick="masukkan('5')">5</button>
+      <button onclick="masukkan('6')">6</button>
+      <button class="operator" onclick="masukkan('+')">+</button>
+
+      <button onclick="masukkan('1')">1</button>
+      <button onclick="masukkan('2')">2</button>
+      <button onclick="masukkan('3')">3</button>
+      <button class="equal" onclick="hitung()">=</button>
+
+      <button class="input" onclick="masukkan('0')">0</button>
+      <button class="input" onclick="masukkan('.')">.</button>
+    </div>
+  </div>
+
+  <script>
+    let ekspresi = '';
+
+    function masukkan(value) {
+      ekspresi += value;
+      document.getElementById('layar').textContent = ekspresi;
+    }
+
+    function hitung() {
+      try {
+        if (ekspresi === '') return;
+        const hasil = eval(ekspresi);
+        document.getElementById('layar').textContent = hasil;
+        ekspresi = hasil.toString();
+      } catch (e) {
+        document.getElementById('layar').textContent = "Error";
+        ekspresi = '';
+      }
+    }
+
+    function hapus() {
+      ekspresi = '';
+      document.getElementById('layar').textContent = '0';
+    }
+
+    function hapusSatu() {
+      ekspresi = ekspresi.slice(0, -1);
+      document.getElementById('layar').textContent = ekspresi || '0';
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profil Instansi</title>
+  <link rel="stylesheet" href="stylecss.css">
+  <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body>
+
+  <!-- 1. Header -->
+  <header>
+    <nav class="navbar">
+            <div class="navbar-container">
+        <a href="fotol" class="logo"><img src="foto_logo_PENS-removebg-preview.png" alt="Logo Instansi"></a><h1 class="branding">Dimas Prayoga</h1>
+        <button class="navbar-toggle">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+        <ul class="navbar-menu ">
+            <li><a class="active" href="#beranda">Beranda</a></li>
+            <li><a class="active" href="#profil">Profil</a></li>
+            <li><a class="active" href="#">Organisasi</a></li>
+            <li><a class="active" href="#">Galeri</a></li>
+            <li><a class="active" href="#">Berita</a></li>
+            <li><a class="active" href="#">Kontak</a></li>
+        </ul>
+        </nav>
+        </div>
+  </header>
+
+  <!-- 2. About Us -->
+  <section id="about" class="about">
+    <h2>Tentang Instansi</h2>
+    <p>
+      Instansi adalah lembaga atau organisasi resmi yang dibentuk untuk melaksanakan tugas dan fungsi tertentu sesuai dengan peraturan yang berlaku. Instansi dapat berasal dari pemerintah maupun non-pemerintah. Instansi pemerintah biasanya dibentuk untuk menjalankan pelayanan publik, seperti kementerian, badan, dinas, dan lembaga negara. Contohnya adalah Kementerian Pendidikan, Kepolisian Negara Republik Indonesia, dan Dinas Kesehatan.
+    </p>
+    <img src="gedung pens.jpg" alt="Gedung Instansi">
+  </section>
+
+  <!-- 3. Struktur Organisasi -->
+  <section id="organisasi" class="organisasi">
+    <h2>Struktur Organisasi</h2>
+    <div class="team">
+      <div class="person">
+        <img src="Foto pribadi.jpg" alt="Ketua">
+        <div class="tooltip">Kepala Instansi</div>
+      </div>
+      <div class="person">
+        <img src="Foto pribadi.jpg" alt="Wakil">
+        <div class="tooltip">Wakil Kepala</div>
+      </div>
+      <div class="person">
+        <img src="Foto pribadi.jpg" alt="Sekretaris">
+        <div class="tooltip">Sekretaris</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Galeri -->
+  <section id="gallery" class="gallery">
+    <h2>Galeri Dokumentasi</h2>
+    <div class="gallery-grid">
+      <img src="kegiatan 1.jpg" alt="Kegiatan 1">
+      <img src="kegiatan 2.jpg" alt="Kegiatan 2">
+      <img src="kegiatan 3.jpg" alt="Kegiatan 3">
+      <img src="kegiatan 4.jpg" alt="Kegiatan 4">
+    </div>
+  </section>
+
+  <!-- 5. Berita -->
+  <section id="news" class="news">
+    <h2>Berita Terbaru</h2>
+    <p>
+      Awal sejarah PENS dimulai pada tahun 1984. Japan International Cooperation Agency (JICA), badan kerja sama internasional yang didirikan pemerintah Jepang tahun 1974 guna membantu pembangunan negara-negara berkembang, berencana untuk membangun  pendidikan politeknik di Indonesia dan memberikan hibah untuk pengembangan politeknik.
+      Bantuan hibah dan kerja sama dari JICA ini sempat ditawarkan ke beberapa kampus, namun mereka tidak segera menerima karena alasan tidak memiliki lahan yang cukup. Akhirnya bantuan dan hibah tersebut jatuh ke Institut Teknologi Sepuluh Nopember (ITS) Surabaya, yang bersedia menyediakan lahan sebesar 10 hektar untuk  pembangunan politeknik.
+    </p>
+    <div class="pagination">
+      <a href="#about">1</a>
+      <a href="#contact">2</a>
+      <a href="#gallery">3</a>
+    </div>
+  </section>
+
+  <!-- 6. Kontak -->
+  <section id="contact" class="contact">
+    <h2>Hubungi Kami</h2>
+    <form>
+      <input type="text" placeholder="Nama Lengkap" required>
+      <input type="email" placeholder="Email" required>
+      <textarea rows="5" placeholder="Pesan Anda" required></textarea>
+      <button type="submit">Kirim Pesan</button>
+    </form>
+    <footer>
+     <div class="credit">
+        <p>&copy; 2025 Dimas Prayoga</p>
+      </div>
+  </footer>
+  </section>
+
+  <script>
+      feather.replace();
+    </script>
+  
+  <script src="java.js"></script>
+
+</body>
+</html>
